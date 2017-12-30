@@ -1,2 +1,8 @@
 # CoreTemplate
-A template for a milt-tier ASP.NET Core website using Datasilk Core &amp; Core JS, Selector.js, &amp; Tapestry CSS framework.
+An open source kanban application for the web, built in ASP.net Core &amp; SQL Server
+
+![Kanban Logo](http://www.markentingh.com/projects/coretemplate/logo.png)
+
+
+
+
