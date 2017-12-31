@@ -20,7 +20,7 @@ This project is meant to be forked and used as a starting point for developing l
 	* [Datasilk Core Js](http://github.com/Datasilk/CoreJs) is used as a simple **client-side framework** for structuring page-level Javascript code, making AJAX requests, and calling utility functions
 	* Build **MVC** web pages using html files & **scaffolding variables**. For example:
      
-#### HTML file with Scaffolding variables & blocks
+#### Example: HTML with Scaffolding variables & blocks
 ```
 <html><body>
 	<div class="menu">{{menu}}</div>
