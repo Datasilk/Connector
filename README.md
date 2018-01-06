@@ -1,7 +1,8 @@
 ![Datasilk Logo](http://www.markentingh.com/projects/datasilk/logo.png)
 
 # Datasilk Core Template
-This project is a template ASP.NET Core web site based on [Datasilk Core](http://github.com/Datasilk/Core), [Datasilk Core Js](http://github.com/Datasilk/CoreJs), [Selector](http://github.com/websilk/selector), and [Tapestry](http://github.com/Websilk/Tapestry). The website includes a user system, login page, and account dashboard. 
+
+This Github repository is a project template for an ASP.NET Core web site based on [Datasilk Core](http://github.com/Datasilk/Core), [Datasilk Core Js](http://github.com/Datasilk/CoreJs), [Selector](http://github.com/websilk/selector), and [Tapestry](http://github.com/Websilk/Tapestry). The website includes a user system, login page, and account dashboard. 
 
 This project is meant to be forked and used as a starting point for developing large-scale, high-performing websites.
 
