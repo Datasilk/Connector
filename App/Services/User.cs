@@ -2,7 +2,7 @@
 {
     public class User : Service
     {
-        public string homePath = "home";
+        public string homePath = "home"; //user home path used to redirect after user log in success
 
         public User(Core DatasilkCore) : base(DatasilkCore)
         {
