@@ -2,11 +2,8 @@
 
 namespace CoreTemplate.Query
 {
-    public class Users : QuerySql
+    public class Users : global::Query.QuerySql
     {
-        public Users(string connectionString) : base(connectionString)
-        {
-        }
 
         public int CreateUser(Models.User user)
         {

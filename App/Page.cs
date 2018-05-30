@@ -1,24 +1,24 @@
-﻿namespace CoreTemplate
+﻿using Microsoft.AspNetCore.Http;
+
+namespace CoreTemplate
 {
     public class Page : Datasilk.Page
     {
-        public Page(global::Core DatasilkCore) : base(DatasilkCore) {
+        public Page(HttpContext context) : base(context)
+        {
             title = "CoreTemplate";
             description = "You can do everything you ever wanted";
         }
 
         public override string Render(string[] path, string body = "", object metadata = null)
         {
-            if (scripts.IndexOf("S.svg.load") < 0)
-            {
-                scripts += "<script language=\"javascript\">S.svg.load('/themes/default/icons.svg');</script>";
-            }
+            scripts.Append("<script language=\"javascript\">S.svg.load('/images/icons.svg');</script>");
             return base.Render(path, body, metadata);
         }
 
         public void LoadHeader(ref Scaffold scaffold)
         {
-            if(S.User.userId > 0)
+            if(User.userId > 0)
             {
                 scaffold.Child("header").Data["user"] = "1";
             }

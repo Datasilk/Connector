@@ -37,17 +37,20 @@ var paths = {
 paths.working = {
     js: {
         platform: [
-            paths.scripts + 'selector/dist/selector.js',
+            paths.scripts + 'selector/selector.js',
             paths.scripts + 'utility/velocity.min.js',
             paths.scripts + 'platform/_super.js', // <---- Datasilk Core Js: S object
             paths.scripts + 'platform/ajax.js', //   <---- Optional platform features
+            paths.scripts + 'platform/drag.js',
             paths.scripts + 'platform/loader.js',
             paths.scripts + 'platform/message.js',
-            paths.scripts + 'platform/polyfill.js',
+            //paths.scripts + 'platform/polyfill.js',
             paths.scripts + 'platform/popup.js',
-            paths.scripts + 'platform/scaffold.js',
+            //paths.scripts + 'platform/scaffold.js',
+            paths.scripts + 'platform/svg.js',
             paths.scripts + 'platform/util.js',
-            paths.scripts + 'platform/util.color.js',
+            //paths.scripts + 'platform/util.color.js',
+            //paths.scripts + 'platform/util.file.js',
             paths.scripts + 'platform/validate.js',
             paths.scripts + 'platform/window.js' //  <---- End of Optional features
         ],
@@ -80,7 +83,8 @@ paths.working = {
             '!' + paths.app + 'Content/**/',
             '!' + paths.app + 'CSS/**/',
             '!' + paths.app + 'CSS/',
-            '!' + paths.app + 'Scripts/**/'
+            '!' + paths.app + 'Scripts/**/',
+            '!' + paths.app + 'obj/**/'
         ]
     }
 };

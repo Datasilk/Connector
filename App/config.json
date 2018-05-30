@@ -1,10 +1,10 @@
 {
-  "namespace":  "CoreTemplate",
+  "assembly":  "CoreTemplate",
   "environment": "development",
   "port": "80",
-  "data": {
+  "sql": {
     "active": "SqlServerTrusted",
-    "SqlServerTrusted": "server=.\\SQL2016; database=CoreTemplate; Trusted_Connection=true"
+    "SqlServerTrusted": "server=.\\SQL2017; database=CoreTemplate; Trusted_Connection=true"
   },
 
   "encryption": {

@@ -10,3 +10,6 @@
 [submodule "App/Scripts/platform"]
 	path = App/Scripts/platform
 	url = http://github.com/datasilk/corejs
+[submodule "Sql/Core"]
+	path = Query/Core
+	url = https://github.com/datasilk/corequery
