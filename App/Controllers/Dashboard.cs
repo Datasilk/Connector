@@ -4,7 +4,7 @@ using System.Text;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
 
-namespace CoreTemplate.Pages
+namespace Connector.Pages
 {
     public class Dashboard: Page
     {
@@ -39,8 +39,8 @@ namespace CoreTemplate.Pages
 
             //load website info
             scaffold.Data["website-name"] = title;
-            scaffold.Data["website-url"] = "http://coretemplate.datasilk.io";
-            scaffold.Data["website-url-name"] = "coretemplate.datasilk.io";
+            scaffold.Data["website-url"] = "http://connector.datasilk.io";
+            scaffold.Data["website-url-name"] = "connector.datasilk.io";
 
             //generate menu system
             var menu = new StringBuilder();

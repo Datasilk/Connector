@@ -8,8 +8,8 @@ public class Routes : Datasilk.Routes
     {
         switch (name)
         {
-            case "": case "home": return new CoreTemplate.Pages.Home(context);
-            case "login": return new CoreTemplate.Pages.Login(context);
+            case "": case "home": return new Connector.Pages.Home(context);
+            case "login": return new Connector.Pages.Login(context);
         }
         return null;
 

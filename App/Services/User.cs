@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace CoreTemplate.Services
+namespace Connector.Services
 {
     public class User : Service
     {

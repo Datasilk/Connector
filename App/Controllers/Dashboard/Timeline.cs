@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace CoreTemplate.Pages.DashboardPages
+namespace Connector.Pages.DashboardPages
 {
     public class Timeline: Page
     {

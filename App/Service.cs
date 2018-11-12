@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Http;
 
-namespace CoreTemplate
+namespace Connector
 {
     public class Service : Datasilk.Service
     {

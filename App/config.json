@@ -1,10 +1,10 @@
 {
-  "assembly":  "CoreTemplate",
+  "assembly":  "Connector",
   "environment": "development",
   "port": "80",
   "sql": {
     "active": "SqlServerTrusted",
-    "SqlServerTrusted": "server=.\\SQL2017; database=CoreTemplate; Trusted_Connection=true"
+    "SqlServerTrusted": "server=.\\SQL2017; database=Connector; Trusted_Connection=true"
   },
 
   "encryption": {

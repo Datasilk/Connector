@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "name": "coretemplate",
+  "name": "connector",
   "private": true,
   "devDependencies": {
     "google-closure-compiler-js": "^20170218.0.0",

@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <RootNamespace>CoreTemplate.Query</RootNamespace>
+    <RootNamespace>Connector.Query</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

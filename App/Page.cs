@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace CoreTemplate
+namespace Connector
 {
     public class Page : Datasilk.Page
     {
         public Page(HttpContext context) : base(context)
         {
-            title = "CoreTemplate";
+            title = "Connector";
             description = "You can do everything you ever wanted";
         }
 
