@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
 
-namespace CoreTemplate.Query
+namespace Query
 {
-    public class Users : global::Query.QuerySql
+    public static class Users
     {
 
-        public int CreateUser(Models.User user)
+        public static int CreateUser(Models.User user)
         {
             return Sql.ExecuteScalar<int>(
                 "User_Create",
@@ -19,7 +19,7 @@ namespace CoreTemplate.Query
             );
         }
 
-        public Models.User AuthenticateUser(string email, string password)
+        public static Models.User AuthenticateUser(string email, string password)
         {
             var list = Sql.Populate<Models.User>("User_Authenticate",
                 new Dictionary<string, object>()
@@ -32,7 +32,7 @@ namespace CoreTemplate.Query
             return null;
         }
 
-        public void UpdatePassword(int userId, string password)
+        public static void UpdatePassword(int userId, string password)
         {
             Sql.ExecuteNonQuery("User_UpdatePassword",
                 new Dictionary<string, object>()
@@ -43,7 +43,7 @@ namespace CoreTemplate.Query
             );
         }
 
-        public string GetEmail(int userId)
+        public static string GetEmail(int userId)
         {
             return Sql.ExecuteScalar<string>("User_GetEmail",
                 new Dictionary<string, object>()
@@ -53,7 +53,7 @@ namespace CoreTemplate.Query
             );
         }
 
-        public string GetPassword(string email)
+        public static string GetPassword(string email)
         {
             return Sql.ExecuteScalar<string>("User_GetPassword",
                 new Dictionary<string, object>()
@@ -63,7 +63,7 @@ namespace CoreTemplate.Query
             );
         }
 
-        public void UpdateEmail(int userId, string email)
+        public static void UpdateEmail(int userId, string email)
         {
             Sql.ExecuteNonQuery("User_UpdateEmail",
                 new Dictionary<string, object>()
@@ -74,12 +74,12 @@ namespace CoreTemplate.Query
             );
         }
 
-        public bool HasPasswords()
+        public static bool HasPasswords()
         {
             return Sql.ExecuteScalar<int>("Users_HasPasswords") == 1;
         }
 
-        public bool HasAdmin()
+        public static bool HasAdmin()
         {
             return Sql.ExecuteScalar<int>("Users_HasAdmin") == 1;
         }

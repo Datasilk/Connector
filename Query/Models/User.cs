@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CoreTemplate.Query.Models
+namespace Query.Models
 {
     public class User
     {
