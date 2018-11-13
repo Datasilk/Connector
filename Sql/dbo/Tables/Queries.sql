@@ -11,3 +11,11 @@ CREATE TABLE [dbo].[Queries]
     [ipaddress] NVARCHAR(26) NOT NULL DEFAULT '', 
     [username] NVARCHAR(32) NULL
 )
+
+GO
+
+CREATE INDEX [IX_Queries_DateCreated] ON [dbo].[Queries] ([datecreated] DESC)
+
+GO
+
+CREATE INDEX [IX_Queries_UserId] ON [dbo].[Queries] ([userId])

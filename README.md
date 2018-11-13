@@ -35,7 +35,7 @@ An open-source, decentralized, encrypted P2P social networking platform built us
 ## FAQ
 
 #### How does subscribing to other node servers work?
-This topic is currently open for discussion since it hasn't been solidified how to subscribe securely.
+In order to subscribe to a node, you must know the node IP Address or domain name either by browsing root servers for public node lists, or by getting that information from the friend who has an account on the node. Next, you'll need the username of the person/friend you wish to subscribe to. Upon sending your username along with your friend's username via REST to the desired node, a response will be returned with a private key (sent encrypted over HTTPS). That private key will forever be stored, linking your local user account with the remote user on the node server of choice and enabling HMAC+ChaCha20 encryption for any future messages. Once that user accepts your subscription request, you'll be able to securely view their timeline from your node's website portal.
 
 
 All above projects (including this one) were concieved & developed by [Mark Entingh](https://www.markentingh.com), who has a strong passion for web development.

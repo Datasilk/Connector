@@ -9,3 +9,7 @@
     [datecreated] DATETIME NOT NULL DEFAULT GETDATE(), 
     [lastlogin] DATETIME NOT NULL DEFAULT GETDATE()
 )
+
+GO
+
+CREATE INDEX [IX_Users_UserName] ON [dbo].[Users] ([username])

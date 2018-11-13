@@ -4,3 +4,7 @@
     [roleId] INT NOT NULL, 
     [datecreated] DATETIME NOT NULL DEFAULT GETDATE()
 )
+
+GO
+
+CREATE INDEX [IX_SubscriberRoles_RoleId] ON [dbo].[SubscriberRoles] ([roleId])

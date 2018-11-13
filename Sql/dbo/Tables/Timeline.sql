@@ -7,6 +7,9 @@
 	[read] INT NOT NULL DEFAULT 0,
     [message] NVARCHAR(MAX) NULL, 
     [photo] INT NULL, 
-    [gallery] INT NULL, 
-    CONSTRAINT [AK_Timeline_Datecreated] UNIQUE ([datecreated] DESC)
+    [gallery] INT NULL 
 )
+
+GO
+
+CREATE INDEX [IX_Timeline_DateCreated] ON [dbo].[Timeline] ([userId], [datecreated] DESC)

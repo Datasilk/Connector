@@ -65,19 +65,33 @@
     <Folder Include="dbo\Views" />
     <Folder Include="dbo\Functions" />
     <Folder Include="dbo\Stored Procedures\Users" />
+    <Folder Include="dbo\Stored Procedures\Subscribers" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Users.sql" />
     <Build Include="dbo\Sequences\SequenceUsers.sql" />
     <Build Include="dbo\Stored Procedures\Users\User_Create.sql" />
     <Build Include="dbo\Stored Procedures\Users\User_GetUserName.sql" />
-    <Build Include="dbo\Stored Procedures\Users\User_GetKey.sql" />
     <Build Include="dbo\Stored Procedures\Users\User_UpdatePassword.sql" />
-    <Build Include="dbo\Stored Procedures\Users\Users_GetList.sql" />
-    <Build Include="dbo\Stored Procedures\Users\Users_HasPasswords.sql" />
     <Build Include="dbo\Stored Procedures\Users\User_Authenticate.sql" />
-    <Build Include="dbo\Stored Procedures\Users\Users_HasAdmin.sql" />
     <None Include="utility\resetdb.sql" />
+    <Build Include="dbo\Stored Procedures\Subscribers\Subscriber_Authenticate.sql" />
+    <Build Include="dbo\Stored Procedures\Subscribers\Subscriber_Create.sql" />
+    <Build Include="dbo\Stored Procedures\Subscribers\Subscriber_GetKey.sql" />
+    <Build Include="dbo\Stored Procedures\Subscribers\Subscriber_GetUserName.sql" />
+    <Build Include="dbo\Stored Procedures\Subscribers\Subscriber_UpdatePassword.sql" />
+    <Build Include="dbo\Tables\HashTags.sql" />
+    <Build Include="dbo\Tables\Queries.sql" />
+    <Build Include="dbo\Tables\Roles.sql" />
+    <Build Include="dbo\Tables\SubscriberRoles.sql" />
+    <Build Include="dbo\Tables\Subscribers.sql" />
+    <Build Include="dbo\Tables\Subscriptions.sql" />
+    <Build Include="dbo\Tables\SubscriptionsQueried.sql" />
+    <Build Include="dbo\Tables\Timeline.sql" />
+    <Build Include="dbo\Tables\TimelineHashTags.sql" />
+    <Build Include="dbo\Sequences\SequenceSubscribers.sql" />
+    <Build Include="dbo\Stored Procedures\Users\User_GetPassword.sql" />
+    <Build Include="dbo\Tables\HashTagRoles.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Sql.publish.xml" />

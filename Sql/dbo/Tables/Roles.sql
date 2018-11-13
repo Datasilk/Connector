@@ -4,3 +4,7 @@
     [name] NVARCHAR(32) NOT NULL, 
     [security] BINARY(512) NOT NULL
 )
+
+GO
+
+CREATE INDEX [IX_Roles_Name] ON [dbo].[Roles] ([name])
