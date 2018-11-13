@@ -8,7 +8,6 @@ public class Startup : Datasilk.Startup {
     {
         base.Configured(app, env, config);
         Query.Sql.connectionString = server.sqlConnectionString;
-        server.resetPass = Query.Users.HasPasswords();
-        server.hasAdmin = Query.Users.HasAdmin();
+        server.hasAdmin = false;
     }
 }

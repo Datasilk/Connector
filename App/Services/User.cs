@@ -7,18 +7,16 @@ namespace Connector.Services
         public string homePath = "dashboard"; //user home path used to redirect after user log in success
 
         public User(HttpContext context) : base(context) { }
-        public string Authenticate(string email, string password)
+        public string Authenticate(string username, string password)
         {
-
-            //var sqlUser = new SqlQueries.User(S);
-            var encrypted = Query.Users.GetPassword(email);
-            if (!DecryptPassword(email, password, encrypted)) { return Error(); }
+            var encrypted = Query.Users.GetKey(username);
+            if (!DecryptPassword(username, password, encrypted)) { return Error(); }
             {
                 //password verified by Bcrypt
-                var user = Query.Users.AuthenticateUser(email, encrypted);
+                var user = Query.Users.AuthenticateUser(username, encrypted);
                 if (user != null)
                 {
-                    User.LogIn(user.userId, user.email, user.name, user.datecreated, "", 1, user.photo);
+                    User.LogIn(user.userId, user.username, "", user.datecreated, "", 1);
                     User.Save(true);
                     return homePath;
                 }
@@ -26,23 +24,23 @@ namespace Connector.Services
             return Error();
         }
 
-        public string SaveAdminPassword(string password)
+        public string SaveUserPassword(string password)
         {
             if (Server.resetPass == true)
             {
                 var update = false; //security check
-                var emailAddr = "";
+                var username = "";
                 var adminId = 1;
                 if (Server.resetPass == true)
                 {
                     //securely change admin password
                     //get admin email address from database
-                    emailAddr = Query.Users.GetEmail(adminId);
-                    if (emailAddr != "" && emailAddr != null) { update = true; }
+                    username = Query.Users.GetUserName(adminId);
+                    if (username != "" && username != null) { update = true; }
                 }
                 if (update == true)
                 {
-                    Query.Users.UpdatePassword(adminId, EncryptPassword(emailAddr, password));
+                    Query.Users.UpdatePassword(adminId, EncryptPassword(username, password));
                     Server.resetPass = false;
                 }
                 return Success();
@@ -50,15 +48,14 @@ namespace Connector.Services
             return Error();
         }
 
-        public string CreateAdminAccount(string name, string email, string password)
+        public string CreateUserAccount(string username, string password)
         {
             if (Server.hasAdmin == false && Server.environment == Server.Environment.development)
             {
                 Query.Users.CreateUser(new Query.Models.User()
                 {
-                    name = name,
-                    email = email,
-                    password = EncryptPassword(email, password)
+                    username = username,
+                    password = EncryptPassword(username, password)
                 });
                 Server.hasAdmin = true;
                 Server.resetPass = false;
@@ -72,16 +69,15 @@ namespace Connector.Services
             User.LogOut();
         }
 
-        public string EncryptPassword(string email, string password)
+        public string EncryptPassword(string username, string password)
         {
             var bCrypt = new BCrypt.Net.BCrypt();
-            return BCrypt.Net.BCrypt.HashPassword(email + Server.salt + password, Server.bcrypt_workfactor);
-
+            return BCrypt.Net.BCrypt.HashPassword(username + Server.salt + password, Server.bcrypt_workfactor);
         }
 
-        public bool DecryptPassword(string email, string password, string encrypted)
+        public bool DecryptPassword(string username, string password, string key)
         {
-            return BCrypt.Net.BCrypt.Verify(email + Server.salt + password, encrypted);
+            return BCrypt.Net.BCrypt.Verify(username + Server.salt + password, key);
         }
     }
 }

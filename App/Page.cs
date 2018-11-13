@@ -7,7 +7,7 @@ namespace Connector
         public Page(HttpContext context) : base(context)
         {
             title = "Connector";
-            description = "You can do everything you ever wanted";
+            description = "Connect with people around the world";
         }
 
         public override string Render(string[] path, string body = "", object metadata = null)

@@ -70,10 +70,9 @@
     <Build Include="dbo\Tables\Users.sql" />
     <Build Include="dbo\Sequences\SequenceUsers.sql" />
     <Build Include="dbo\Stored Procedures\Users\User_Create.sql" />
-    <Build Include="dbo\Stored Procedures\Users\User_GetEmail.sql" />
-    <Build Include="dbo\Stored Procedures\Users\User_GetPassword.sql" />
+    <Build Include="dbo\Stored Procedures\Users\User_GetUserName.sql" />
+    <Build Include="dbo\Stored Procedures\Users\User_GetKey.sql" />
     <Build Include="dbo\Stored Procedures\Users\User_UpdatePassword.sql" />
-    <Build Include="dbo\Stored Procedures\Users\User_UpdateEmail.sql" />
     <Build Include="dbo\Stored Procedures\Users\Users_GetList.sql" />
     <Build Include="dbo\Stored Procedures\Users\Users_HasPasswords.sql" />
     <Build Include="dbo\Stored Procedures\Users\User_Authenticate.sql" />
@@ -82,5 +81,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Sql.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="Sql.refactorlog" />
   </ItemGroup>
 </Project>

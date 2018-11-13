@@ -13,3 +13,6 @@
 [submodule "Sql/Core"]
 	path = Query/Core
 	url = https://github.com/datasilk/corequery
+[submodule "App/Common/Utility/Crypto"]
+	path = App/Common/Utility/Crypto
+	url = https://github.com/datasilk/Crypto

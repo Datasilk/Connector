@@ -1,11 +1,10 @@
 ﻿CREATE PROCEDURE [dbo].[User_Create]
-	@name nvarchar(64),
-	@email nvarchar(64),
-	@password nvarchar(255),
-	@photo bit = 0
+	@username nvarchar(64),
+	@key nvarchar(64),
+	@password nvarchar(255)
 AS
 	DECLARE @id int = NEXT VALUE FOR SequenceUsers
-	INSERT INTO Users (userId, [name], email, [password], photo, datecreated)
-	VALUES (@id, @name, @email, @password, @photo, GETDATE())
+	INSERT INTO Users (userId, username, [password], datecreated)
+	VALUES (@id, @username, @key, @password, GETDATE())
 	
 	SELECT @id

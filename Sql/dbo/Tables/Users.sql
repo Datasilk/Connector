@@ -1,11 +1,11 @@
 ﻿CREATE TABLE [dbo].[Users]
 (
 	[userId] INT NOT NULL PRIMARY KEY, 
-    [name] NVARCHAR(64) NOT NULL, 
-    [email] NVARCHAR(64) NOT NULL, 
-    [password] NVARCHAR(255) NOT NULL DEFAULT '', 
+    [name] NVARCHAR(64) NOT NULL DEFAULT '', 
+    [username] NVARCHAR(32) NOT NULL, 
+    [password] NVARCHAR(255) NOT NULL, 
     [photo] BIT NOT NULL DEFAULT 0, 
-    [active] BIT NOT NULL DEFAULT 1, 
+    [status] SMALLINT NOT NULL DEFAULT 1, 
     [datecreated] DATETIME NOT NULL DEFAULT GETDATE(), 
-    [lastboard] INT NOT NULL DEFAULT 0
+    [lastlogin] DATETIME NOT NULL DEFAULT GETDATE()
 )

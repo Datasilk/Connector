@@ -2,24 +2,24 @@
 
 namespace Query
 {
-    public static class Users
+    public static class Subscribers
     {
 
-        public static int CreateUser(Models.User user)
+        public static int CreateSubscriber(Models.Subscriber subscriber)
         {
             return Sql.ExecuteScalar<int>(
-                "User_Create",
+                "Subscriber_Create",
                 new Dictionary<string, object>()
                 {
-                    {"username", user.username },
-                    {"password", user.password }
+                    {"username", subscriber.username },
+                    {"password", subscriber.password }
                 }
             );
         }
 
-        public static Models.User AuthenticateUser(string username, string password)
+        public static Models.Subscriber AuthenticateSubscriber(string username, string password)
         {
-            var list = Sql.Populate<Models.User>("User_Authenticate",
+            var list = Sql.Populate<Models.Subscriber>("Subscriber_Authenticate",
                 new Dictionary<string, object>()
                 {
                     {"username", username },
@@ -30,30 +30,30 @@ namespace Query
             return null;
         }
 
-        public static void UpdatePassword(int userId, string password)
+        public static void UpdatePassword(int subscriberId, string password)
         {
-            Sql.ExecuteNonQuery("User_UpdatePassword",
+            Sql.ExecuteNonQuery("Subscriber_UpdatePassword",
                 new Dictionary<string, object>()
                 {
-                    {"userId", userId },
+                    {"subscriberId", subscriberId },
                     {"password", password }
                 }
             );
         }
 
-        public static string GetUserName(int userId)
+        public static string GetUserName(int subscriberId)
         {
-            return Sql.ExecuteScalar<string>("User_GetUserName",
+            return Sql.ExecuteScalar<string>("Subscriber_GetUserName",
                 new Dictionary<string, object>()
                 {
-                    {"userId", userId }
+                    {"subscriberId", subscriberId }
                 }
             );
         }
 
         public static string GetKey(string username)
         {
-            return Sql.ExecuteScalar<string>("User_GetKey",
+            return Sql.ExecuteScalar<string>("Subscriber_GetKey",
                 new Dictionary<string, object>()
                 {
                     {"username", username }

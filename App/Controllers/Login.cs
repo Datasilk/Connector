@@ -20,9 +20,9 @@ namespace Connector.Pages
             if(Server.environment == Server.Environment.development && Server.hasAdmin == false)
             {
                 //load new administrator form
-                scaffold = new Scaffold("/Views/Login/new-admin.html", Server.Scaffold);
+                scaffold = new Scaffold("/Views/Login/new-user.html", Server.Scaffold);
                 scaffold.Data["title"] = "Create an administrator account";
-                scripts.Append("<script src=\"/js/views/login/new-admin.js\"></script>");
+                scripts.Append("<script src=\"/js/views/login/new-user.js\"></script>");
             }
             else if (Server.environment == Server.Environment.development && User.resetPass == true)
             {
