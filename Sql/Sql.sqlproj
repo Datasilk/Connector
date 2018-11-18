@@ -75,11 +75,9 @@
     <Build Include="dbo\Stored Procedures\Users\User_UpdatePassword.sql" />
     <Build Include="dbo\Stored Procedures\Users\User_Authenticate.sql" />
     <None Include="utility\resetdb.sql" />
-    <Build Include="dbo\Stored Procedures\Subscribers\Subscriber_Authenticate.sql" />
     <Build Include="dbo\Stored Procedures\Subscribers\Subscriber_Create.sql" />
     <Build Include="dbo\Stored Procedures\Subscribers\Subscriber_GetKey.sql" />
-    <Build Include="dbo\Stored Procedures\Subscribers\Subscriber_GetUserName.sql" />
-    <Build Include="dbo\Stored Procedures\Subscribers\Subscriber_UpdatePassword.sql" />
+    <Build Include="dbo\Stored Procedures\Subscribers\Subscriber_GetDetails.sql" />
     <Build Include="dbo\Tables\HashTags.sql" />
     <Build Include="dbo\Tables\Queries.sql" />
     <Build Include="dbo\Tables\Roles.sql" />
