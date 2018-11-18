@@ -5,7 +5,7 @@ CREATE TABLE [dbo].[Subscribers]
 (
 	[subscriberId] INT NOT NULL PRIMARY KEY, 
     [userId] INT NOT NULL , 
-    [active] BIT NOT NULL DEFAULT 1, 
+    [active] BIT NOT NULL DEFAULT 0, 
     [username] NVARCHAR(64) NOT NULL, 
     [key] NVARCHAR(64) NOT NULL DEFAULT '' , 
 

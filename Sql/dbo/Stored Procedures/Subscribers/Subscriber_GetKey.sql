@@ -1,4 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[Subscriber_GetKey]
+	@userId int,
 	@username nvarchar(100)
 AS
-	SELECT [password] FROM Subscribers WHERE username=@username
+	SELECT [key] FROM Subscribers WHERE userId=@userId AND username=@username
