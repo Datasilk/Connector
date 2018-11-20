@@ -71,7 +71,7 @@
     <Build Include="dbo\Tables\Users.sql" />
     <Build Include="dbo\Sequences\SequenceUsers.sql" />
     <Build Include="dbo\Stored Procedures\Users\User_Create.sql" />
-    <Build Include="dbo\Stored Procedures\Users\User_GetUserName.sql" />
+    <Build Include="dbo\Stored Procedures\Users\User_GetDetails.sql" />
     <Build Include="dbo\Stored Procedures\Users\User_UpdatePassword.sql" />
     <Build Include="dbo\Stored Procedures\Users\User_Authenticate.sql" />
     <None Include="utility\resetdb.sql" />
@@ -90,6 +90,8 @@
     <Build Include="dbo\Sequences\SequenceSubscribers.sql" />
     <Build Include="dbo\Stored Procedures\Users\User_GetPassword.sql" />
     <Build Include="dbo\Tables\HashTagRoles.sql" />
+    <Build Include="dbo\Stored Procedures\Users\Users_Exist.sql" />
+    <Build Include="dbo\Tables\Comments.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Sql.publish.xml" />

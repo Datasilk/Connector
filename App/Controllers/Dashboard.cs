@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using Microsoft.AspNetCore.Http;
+using Connector.Models.UI;
 
 namespace Connector.Pages
 {
@@ -32,40 +33,25 @@ namespace Connector.Pages
             var scaffold = new Scaffold("/Views/Dashboard/dashboard.html", Server.Scaffold);
             var scaffMenu = new Scaffold("/Views/Dashboard/menu-item.html", Server.Scaffold);
 
-            //load user profile
-            scaffold.Data["profile-img"] = "";
-            scaffold.Data["btn-edit-img"] = "";
-            scaffold.Data["profile-name"] = User.displayName;
-
-            //load website info
-            scaffold.Data["website-name"] = title;
-            scaffold.Data["website-url"] = "http://connector.datasilk.io";
-            scaffold.Data["website-url-name"] = "connector.datasilk.io";
-
-            //generate menu system
-            var menu = new StringBuilder();
-            var menus = new List<structMenuItem>()
+            //load UI
+            scaffold.Bind(new Header()
             {
-                menuItem("Timeline", "timeline", "/dashboard/timeline", "timeline")
-            };
-
-            //render menu system
-            foreach (var item in menus)
-            {
-                menu.Append(renderMenuItem(scaffMenu, item, 0));
-            }
-            scaffold.Data["menu"] = "<ul class=\"menu\">" + menu.ToString() + "</ul>";
+                User = new HeaderUser()
+                {
+                    Name = User.name,
+                    Username = User.displayName,
+                    Image = User.photo ? "/content/users/" + User.userId + ".jpg" : "/images/nophoto.jpg"
+                }
+            });
 
             //get dashboard section name
             var subPath = context.Request.Path.ToString().Replace("dashboard", "").Substring(1);
             if(subPath == "" || subPath == "/") { subPath = "timeline"; }
-            var html = "";
 
             //load dashboard section
-            Page subpage = null;
             var t = LoadSubPage(subPath);
-            subpage = t.Item1;
-            html = t.Item2;
+            Page subpage = t.Item1;
+            var html = t.Item2;
             if (html == "") { return AccessDenied(true, new Login(context)); }
             scaffold.Data["body"] = html;
 

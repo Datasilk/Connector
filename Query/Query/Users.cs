@@ -11,6 +11,8 @@ namespace Query
                 "User_Create",
                 new Dictionary<string, object>()
                 {
+                    {"name", user.name },
+                    {"email", user.email },
                     {"username", user.username },
                     {"password", user.password }
                 }
@@ -41,9 +43,9 @@ namespace Query
             );
         }
 
-        public static string GetUserName(int userId)
+        public static Models.User GetDetails(int userId)
         {
-            return Sql.ExecuteScalar<string>("User_GetUserName",
+            return Sql.ExecuteScalar<Models.User>("User_GetDetails",
                 new Dictionary<string, object>()
                 {
                     {"userId", userId }
@@ -51,14 +53,19 @@ namespace Query
             );
         }
 
-        public static string GetKey(string username)
+        public static string GetPassword(string username)
         {
-            return Sql.ExecuteScalar<string>("User_GetKey",
+            return Sql.ExecuteScalar<string>("User_GetPassword",
                 new Dictionary<string, object>()
                 {
                     {"username", username }
                 }
             );
+        }
+
+        public static bool Exist()
+        {
+            return Sql.ExecuteScalar<int>("Users_Exist") == 1;
         }
     }
 }

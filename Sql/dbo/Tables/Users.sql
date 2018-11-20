@@ -2,6 +2,7 @@
 (
 	[userId] INT NOT NULL PRIMARY KEY, 
     [name] NVARCHAR(64) NOT NULL DEFAULT '', 
+    [email] NVARCHAR(64) NOT NULL DEFAULT '', 
     [username] NVARCHAR(32) NOT NULL, 
     [password] NVARCHAR(255) NOT NULL, 
     [photo] BIT NOT NULL DEFAULT 0, 

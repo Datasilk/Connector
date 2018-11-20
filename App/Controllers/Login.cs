@@ -17,19 +17,12 @@ namespace Connector.Pages
             //check for database reset
             var scaffold = new Scaffold("/Views/Login/login.html", Server.Scaffold);
 
-            if(Server.environment == Server.Environment.development && Server.hasAdmin == false)
+            if(Server.hasAdmin == false)
             {
                 //load new administrator form
                 scaffold = new Scaffold("/Views/Login/new-user.html", Server.Scaffold);
-                scaffold.Data["title"] = "Create an administrator account";
+                scaffold.Data["title"] = "Create a user account";
                 scripts.Append("<script src=\"/js/views/login/new-user.js\"></script>");
-            }
-            else if (Server.environment == Server.Environment.development && User.resetPass == true)
-            {
-                //load new password form (for admin only)
-                scaffold = new Scaffold("/Pages/Login/new-pass.html", Server.Scaffold);
-                scaffold.Data["title"] = "Create an administrator password";
-                scripts.Append("<script src=\"/js/vviews/login/new-pass.js\"></script>");
             }
             else
             {

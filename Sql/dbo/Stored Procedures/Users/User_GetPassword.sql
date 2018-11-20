@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[User_GetKey]
-	@username nvarchar(100)
+﻿CREATE PROCEDURE [dbo].[User_GetPassword]
+	@username nvarchar(32)
 AS
 	SELECT [password] FROM Users WHERE username=@username

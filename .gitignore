@@ -8,6 +8,7 @@
 
 /App/wwwroot/css/
 /App/wwwroot/js/
+/App/wwwroot/content/
 
 *.bak
 *.jfm

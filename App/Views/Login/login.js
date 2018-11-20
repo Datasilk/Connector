@@ -1,7 +1,7 @@
 ﻿S.login = {
     submit: function () {
         var data = {
-            email: $('#email').val(),
+            username: $('#username').val(),
             password: $('#password').val()
         }
         var msg = $('.login .message');
