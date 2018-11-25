@@ -10,17 +10,14 @@ namespace Connector.Common.Client
     public static class Users
     {
         #region "Encryption"
-        private static string EncryptPassword(string username, string password)
+        private static string EncryptPassword(string username, string password, string salt, int bcrypt_workfactor = 10)
         {
-            var server = global::Server.Instance;
-            var bCrypt = new BCrypt.Net.BCrypt();
-            return BCrypt.Net.BCrypt.HashPassword(username + server.salt + password, server.bcrypt_workfactor);
+            return BCrypt.Net.BCrypt.HashPassword(username + salt + password, bcrypt_workfactor);
         }
 
-        private static bool DecryptPassword(string username, string rawPassword, string encryptedPassword)
+        private static bool DecryptPassword(string username, string rawPassword, string encryptedPassword, string salt)
         {
-            var server = global::Server.Instance;
-            return BCrypt.Net.BCrypt.Verify(username + server.salt + rawPassword, encryptedPassword);
+            return BCrypt.Net.BCrypt.Verify(username + salt + rawPassword, encryptedPassword);
         }
         #endregion
 
@@ -30,14 +27,14 @@ namespace Connector.Common.Client
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public static int Create(string name, string email, string username, string rawPassword)
+        public static int Create(string name, string email, string username, string rawPassword, string salt, int bcrypt_workfactor = 10)
         {
             var user = new Query.Models.User()
             {
                 name = name,
                 email = email,
                 username = username,
-                password = EncryptPassword(username, rawPassword)
+                password = EncryptPassword(username, rawPassword, salt, bcrypt_workfactor)
             };
             return Query.Users.CreateUser(user);
         }
@@ -49,10 +46,10 @@ namespace Connector.Common.Client
         /// <param name="username"></param>
         /// <param name="rawPassword"></param>
         /// <returns></returns>
-        public static Query.Models.User Authenticate(string username, string rawPassword)
+        public static Query.Models.User Authenticate(string username, string rawPassword, string salt)
         {
             var encrypted = Query.Users.GetPassword(username);
-            if(DecryptPassword(username, rawPassword, encrypted))
+            if(DecryptPassword(username, rawPassword, encrypted, salt))
             {
                 return Query.Users.AuthenticateUser(username, encrypted);
             }

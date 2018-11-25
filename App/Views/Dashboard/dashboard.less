@@ -1,3 +1,18 @@
-﻿header{
-
+﻿header{width:100%; padding:10px 20px; line-height:0; height:55px;
+    > .site{ display:inline-block; padding:3px 50px 0 0;
+        img{height:24px; vertical-align:bottom;}
+    }
+    > ul{ display:inline-block; position:relative; top:11px;
+        li{float:left; list-style:none; padding:7px 15px; margin:0 2px; border-top-left-radius:8px; border-top-right-radius:8px; line-height:1.25;
+           a{text-decoration:none;}
+        }
+        &:after{content:'';display:block;height:0;font-size:0;clear:both;}
+    }
+    > .profile{ float:right; line-height:0; padding:10px 10px 13px 15px; margin:-10px -20px -12px 0; background:#375d50; cursor:pointer;
+        span{font-size:18px; vertical-align:top; display:inline-block; padding:15px 5px 0 0;}
+        img{overflow:hidden; border-radius:64px; height:32px;}
+    }
+    > .profile:hover{background:#2c6c56;}
+    > .profile:active{background:#24887f;}
+    &:after{content:'';display:block;height:0;font-size:0;clear:both;} 
 }

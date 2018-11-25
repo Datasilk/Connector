@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace Connector.Pages.DashboardPages
+namespace Connector.Pages
 {
-    public class Timeline: Page
+    public class Timeline : Dashboard
     {
         public Timeline(HttpContext context) : base(context)
         {
@@ -10,9 +10,7 @@ namespace Connector.Pages.DashboardPages
 
         public override string Render(string[] path, string body = "", object metadata = null)
         {
-            //load timeline
-            var scaffold = new Scaffold("/Views/Dashboard/Timeline/timeline.html", Server.Scaffold);
-            return scaffold.Render();
+            return base.Render(path, body, metadata);
         }
     }
 }

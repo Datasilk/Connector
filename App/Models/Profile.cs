@@ -1,11 +1,6 @@
-﻿namespace Connector.Models.UI
+﻿namespace Connector.Models
 {
-    public class Header
-    {
-        public HeaderUser User { get; set; }
-    }
-
-    public class HeaderUser
+    public class Profile
     {
         public string Image { get; set; }
         public string Name { get; set; }

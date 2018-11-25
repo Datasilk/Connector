@@ -10,7 +10,7 @@ var gulp = require('gulp'),
     rename = require('gulp-rename'),
     merge = require('merge-stream'),
     config = require('./App/config.json');
-    
+
 //get config variables from config.json
 var environment = config.environment;
 
@@ -23,14 +23,14 @@ if (environment != 'dev' && environment != 'development' && environment != null)
 
 //paths
 var paths = {
-    scripts: './App/Scripts/',
-    css: './App/CSS/',
-    app: './App/',
-    themes: './App/Content/themes/',
+    scripts: 'App/Scripts/',
+    css: 'App/CSS/',
+    app: 'App/',
+    themes: 'App/Content/themes/',
     vendor: {
-        root: './App/Vendor/**/'
+        root: 'App/Vendor/**/'
     },
-    webroot: './App/wwwroot/',
+    webroot: 'App/wwwroot/',
 };
 
 //working paths
@@ -41,16 +41,15 @@ paths.working = {
             paths.scripts + 'utility/velocity.min.js',
             paths.scripts + 'platform/_super.js', // <---- Datasilk Core Js: S object
             paths.scripts + 'platform/ajax.js', //   <---- Optional platform features
-            paths.scripts + 'platform/drag.js',
             paths.scripts + 'platform/loader.js',
             paths.scripts + 'platform/message.js',
-            //paths.scripts + 'platform/polyfill.js',
+            paths.scripts + 'platform/polyfill.js',
             paths.scripts + 'platform/popup.js',
-            //paths.scripts + 'platform/scaffold.js',
+            paths.scripts + 'platform/scaffold.js',
+            paths.scripts + 'platform/scrollbar.js',
             paths.scripts + 'platform/svg.js',
             paths.scripts + 'platform/util.js',
-            //paths.scripts + 'platform/util.color.js',
-            //paths.scripts + 'platform/util.file.js',
+            paths.scripts + 'platform/util.color.js',
             paths.scripts + 'platform/validate.js',
             paths.scripts + 'platform/window.js' //  <---- End of Optional features
         ],
@@ -58,13 +57,18 @@ paths.working = {
         utility: [
             paths.scripts + 'utility/*.js',
             paths.scripts + 'utility/**/*.js'
+        ],
+        core: [
+            '!' + paths.scripts + 'core/platform.js',
+            paths.scripts + 'core/*.js'
         ]
     },
 
-    less:{
+    less: {
         platform: paths.css + 'platform.less',
         app: [
-            paths.app + '**/*.less'
+            paths.app + '**/*.less',
+            '!' + paths.css + '**/*.less'
         ],
         themes: paths.css + 'themes/*.less',
         tapestry: paths.css + 'tapestry/tapestry.less',
@@ -77,15 +81,37 @@ paths.working = {
         app: paths.app + '**/*.css'
     },
 
+    vendor: {
+        js: paths.vendor.root + 'js/*.js',
+        css: paths.vendor.root + 'css/*.css',
+        less: paths.vendor.root + 'css/app.less'
+    },
+
     exclude: {
         app: [
-            '!' + paths.app + 'wwwroot/**/',
-            '!' + paths.app + 'Content/**/',
-            '!' + paths.app + 'CSS/**/',
-            '!' + paths.app + 'CSS/',
-            '!' + paths.app + 'Scripts/**/',
-            '!' + paths.app + 'obj/**/'
+            '!' + paths.app + 'wwwroot/**/*',
+            '!' + paths.app + 'Content/**/*',
+            '!' + paths.app + 'CSS/**/*',
+            '!' + paths.app + 'CSS/*',
+            '!' + paths.app + 'Scripts/**/*',
+            '!' + paths.app + 'obj/**/*'
         ]
+    },
+
+    dashboard: {
+        js: [
+            //aths.scripts + 'utility/simplemde.min.js',
+            //aths.scripts + 'utility/highlight.min.js',
+            //aths.scripts + 'utility/remarkable.min.js',
+            paths.app + 'views/dashboard/dashboard.js'
+        ],
+        css: [
+            //paths.css + 'utility/font-awesome.css',
+            //paths.css + 'utility/simplemde.min.css',
+            //paths.css + 'utility/highlight/atelier-forest-light.css', // <-- code syntax highlighting color scheme
+            paths.webroot + 'css/views/dashboard/dashboard.css'
+        ],
+        compiled: paths.webroot + 'css/views/dashboard/dashboard.css'
     }
 };
 
@@ -102,6 +128,7 @@ paths.compiled = {
 gulp.task('js:app', function () {
     var pathlist = paths.working.exclude.app.slice(0);
     pathlist.unshift(paths.working.js.app);
+    console.log(pathlist);
     var p = gulp.src(pathlist)
         .pipe(rename(function (path) {
             path.dirname = path.dirname.toLowerCase();
@@ -113,11 +140,27 @@ gulp.task('js:app', function () {
     return p.pipe(gulp.dest(paths.compiled.js, { overwrite: true }));
 });
 
+gulp.task('js:selector', function () {
+    var p = gulp.src(paths.scripts + 'selector/selector.js', { base: '.' })
+        .pipe(concat('selector.js'));
+    if (prod == true) {
+        //p = p
+        //    .pipe(compile({
+        //        compilationLevel: 'SIMPLE',
+        //        warningLevel: 'VERBOSE',
+        //        jsOutputFile: 'selector.js',  // outputs single file
+        //        createSourceMap: true
+        //    }));
+        p = p.pipe(uglify());
+    }
+    return p.pipe(gulp.dest(paths.compiled.js, { overwrite: true }));
+});
+
 gulp.task('js:platform', function () {
     var p = gulp.src(paths.working.js.platform, { base: '.' })
-        .pipe(concat(paths.compiled.platform));
+        .pipe(concat('platform.js'));
     if (prod == true) { p = p.pipe(uglify()); }
-    return p.pipe(gulp.dest('.', { overwrite: true }));
+    return p.pipe(gulp.dest(paths.compiled.js, { overwrite: true }));
 });
 
 gulp.task('js:utility', function () {
@@ -132,11 +175,33 @@ gulp.task('js:utility', function () {
     return p.pipe(gulp.dest(paths.compiled.js + 'utility', { overwrite: true }));
 });
 
-gulp.task('js', function () {
-    gulp.start('js:app');
-    gulp.start('js:platform');
-    gulp.start('js:utility');
+gulp.task('js:core', function () {
+    var p = gulp.src(paths.working.js.core)
+        .pipe(rename(function (path) {
+            path.dirname = path.dirname.toLowerCase();
+            path.basename = path.basename.toLowerCase();
+            path.extname = path.extname.toLowerCase();
+        }));
+
+    if (prod == true) { p = p.pipe(uglify()); }
+    return p.pipe(gulp.dest(paths.compiled.js + 'core', { overwrite: true }));
 });
+
+/* custom js compiling */
+gulp.task('js:dashboard', function () {
+    var p = gulp.src(paths.working.dashboard.js, { base: '.' })
+        .pipe(concat(paths.compiled.js + 'dashboard.js'));
+    if (prod == true) { p = p.pipe(uglify()); }
+    return p.pipe(gulp.dest('.', { overwrite: true }));
+});
+
+gulp.task('js', gulp.series(
+    'js:app',
+    'js:platform',
+    'js:utility',
+    'js:core',
+    'js:dashboard'
+));
 
 //tasks for compiling LESS & CSS /////////////////////////////////////////////////////////////////////
 gulp.task('less:app', function () {
@@ -151,7 +216,7 @@ gulp.task('less:app', function () {
             path.basename = path.basename.toLowerCase();
             path.extname = path.extname.toLowerCase();
         }));
-    if(prod == true){ p = p.pipe(cleancss({compatibility: 'ie8'})); }
+    if (prod == true) { p = p.pipe(cleancss({ compatibility: 'ie8' })); }
     return p.pipe(gulp.dest(paths.compiled.app, { overwrite: true }));
 });
 
@@ -211,26 +276,45 @@ gulp.task('css:utility', function () {
     return p.pipe(gulp.dest(paths.compiled.css + 'utility', { overwrite: true }));
 });
 
-gulp.task('less', function () {
-    gulp.start('less:platform');
-    gulp.start('less:app');
-    gulp.start('less:themes');
-    gulp.start('less:utility');
+/* custom css compiling */
+gulp.task('css:dashboard', function () {
+    var p = gulp.src(paths.working.dashboard.css, { base: '.' })
+        .pipe(concat(paths.compiled.css + 'dashboard.css'));
+    if (prod == true) { p = p.pipe(uglify()); }
+    return p.pipe(gulp.dest('.', { overwrite: true }));
 });
 
-gulp.task('css', function () {
-    gulp.start('css:themes');
-    gulp.start('css:app');
-    gulp.start('css:utility');
-});
+gulp.task('less', gulp.series(
+    'less:platform',
+    'less:app',
+    'less:themes',
+    'less:utility'
+));
+
+gulp.task('css', gulp.series(
+    'css:themes',
+    'css:app',
+    'css:utility',
+    'css:dashboard'
+));
+
+//tasks for compiling vendor app dependencies /////////////////////////////////////////////////
+
 
 //default task
-gulp.task('default', ['js', 'less', 'css']);
+gulp.task('default', gulp.series('js', 'less', 'css'));
 
 //watch task
 gulp.task('watch', function () {
     //watch platform JS
-    gulp.watch(paths.working.js.platform, ['js:platform']);
+    gulp.watch([
+        paths.scripts + 'selector/selector.js',
+        paths.scripts + 'core/platform.js',
+        paths.scripts + 'platform/*.js'
+    ], gulp.series('js:platform'));
+
+    //watch core JS
+    gulp.watch(paths.working.js.core, gulp.series('js:core'));
 
     //watch app JS
     var pathjs = paths.working.exclude.app.slice(0);
@@ -238,7 +322,10 @@ gulp.task('watch', function () {
         pathjs[x] += '*.js';
     }
     pathjs.unshift(paths.working.js.app);
-    gulp.watch(pathjs, ['js:app']);
+    gulp.watch(pathjs, gulp.series('js:app'));
+
+    //watch dashboard JS
+    gulp.watch(paths.working.dashboard.js, gulp.series('js:dashboard'));
 
     //watch app LESS
     var pathless = paths.working.exclude.app.slice(0);
@@ -248,23 +335,23 @@ gulp.task('watch', function () {
     for (var x = paths.working.less.app.length - 1; x >= 0; x--) {
         pathless.unshift(paths.working.less.app[x]);
     }
-    gulp.watch(pathless, ['less:app']);
+    gulp.watch(pathless, gulp.series('less:app', 'css:dashboard'));
 
     //watch platform LESS
     gulp.watch([
         paths.working.less.platform,
         paths.working.less.tapestry
-    ], ['less:platform']);
+    ], gulp.series('less:platform'));
 
     //watch themes LESS
     gulp.watch([
         paths.working.less.themes
-    ], ['less:themes']);
+    ], gulp.series('less:platform'));
 
     //watch utility LESS
     gulp.watch([
         paths.working.less.utility
-    ], ['less:utility']);
+    ], gulp.series('less:utility'));
 
     //watch app CSS
     var pathcss = paths.working.exclude.app.slice(0);
@@ -272,15 +359,10 @@ gulp.task('watch', function () {
         pathcss[x] += '*.css';
     }
     pathcss.unshift(paths.working.css.app);
-    gulp.watch(pathcss, ['css:app']);
-
-    //watch themes CSS
-    gulp.watch([
-        paths.working.css.themes
-    ], ['css:themes']);
+    gulp.watch(pathcss, gulp.series('css:app'));
 
     //watch utility CSS
     gulp.watch([
         paths.working.css.utility
-    ], ['css:utility']);
+    ], gulp.series('css:utility'));
 });

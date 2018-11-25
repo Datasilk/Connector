@@ -8,7 +8,8 @@ namespace Connector.Services
 
         public string Authenticate(string username, string password)
         {
-            var user = Common.Client.Users.Authenticate(username, password);
+            var server = global::Server.Instance;
+            var user = Common.Client.Users.Authenticate(username, password, server.salt);
             if (user != null)
             {
                 User.LogIn(user.userId, user.email, user.name, user.datecreated, user.username, 1, user.photo);
@@ -20,7 +21,8 @@ namespace Connector.Services
 
         public string CreateUserAccount(string name, string email, string username, string password)
         {
-            Common.Client.Users.Create(name, email, username, password);
+            var server = global::Server.Instance;
+            Common.Client.Users.Create(name, email, username, password, server.salt, server.bcrypt_workfactor);
             if(Server.hasAdmin == false)
             {
                 Server.hasAdmin = true;
