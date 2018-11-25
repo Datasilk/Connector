@@ -9,6 +9,7 @@
     {
         public ResponseType type { get; set; }
         public string title { get; set; }
+        public string icon { get; set; }
         public string html { get; set; }
         public string js { get; set; }
         public string jsfile { get; set; }

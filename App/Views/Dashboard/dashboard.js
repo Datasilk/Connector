@@ -40,10 +40,12 @@
                 dataType:'json',
                 success: function (d) {
                     //generate tab
-                    
-                    let li = document.createElement('li');
-                    li.className = 'tab-' + id + ' selected';
-                    li.innerHTML = '<a href="/' + compiledpath + '">' + d.title + '</a>';
+                    let li = $('#template_tab').html()
+                        .replace('#li-class#', 'tab-' + id + ' selected')
+                        .replace('#href#', compiledpath)
+                        .replace('#label#', d.title)
+                        .replace('#icon#', d.icon);
+                    console.log(li);
                     $('header ul.tabs').append(li);
                     $('.tab-' + id + ' a').on('click', (e) => {
                         S.dashboard.tab.open(path, data);

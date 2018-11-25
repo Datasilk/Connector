@@ -8,6 +8,24 @@
             <span>{{user.name}}</span>
             <img src="{{user.image}}" />
         </div>
+        <div class="options large">
+            <svg viewBox="0 0 48 36">
+                <use xlink:href="#icon-dots" x="0" y="0" width="48" height="36"></use>
+            </svg>
+        </div>
     </div>
 </header>
 <div class="dash-body size-lg">{{body}}</div>
+
+<script type="text/html" id="template_tab">
+    <li class="#li-class#">
+        <div class="spoon-l"></div>
+        <div class="spoon-r"></div>
+        <a href="#href#">
+            <svg viewBox="0 0 48 36">
+                <use xlink:href="##icon#" x="0" y="0" width="48" height="36"></use>
+            </svg>
+            <span>#label#</span>
+        </a>
+    </li>
+</script>

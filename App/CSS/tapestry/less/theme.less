@@ -26,35 +26,14 @@
     a{
         .link(@a-link, @a-hover, @a-active, @a-link, @important);
         .svglink(@a-link, @a-hover, @a-active, @a-link, @important);
-    }
-    a.faded{
-        .link(fade(@a-link, @fade-perc), fade(@a-hover, @fade-perc), fade(@a-active, @fade-perc), fade(@a-link, @fade-perc), @important);
-        .svglink(fade(@a-link, @fade-perc), fade(@a-hover, @fade-perc), fade(@a-active, @fade-perc), fade(@a-link, @fade-perc), @important);
-    }    
+    }  
 }
 
 // icons : anchor link icons (that use the .icon or .nolinks classes)
 .icons(@a-link, @a-hover, @a-active, @a-visited, @important:false){
-    .icon a, .nolinks a, a.icon, &.icon a{
-        .link(@a-link, @a-hover, @a-active, @a-link, true);
-        .svglink(@a-link, @a-hover, @a-active, @a-link, true);
-    }
-}
-
-.menu-icons(@a-link, @a-hover, @a-active, @a-visited, @important:false){
-    a{
-        & when (@important = true){
-            &:link .icon use{color:@a-link !important; fill:@a-link !important;}
-            &:visited .icon use{color:@a-visited !important; fill:@a-visited !important;}
-            &:hover .icon use{color:@a-hover !important; fill:@a-hover !important;} 
-            &:active .icon use{color:@a-active !important; fill:@a-active !important;} 
-        } 
-        & when (@important = false){
-            &:link .icon use{color:@a-link; fill:@a-link;}
-            &:visited .icon use{color:@a-visited; fill:@a-visited;}
-            &:hover .icon use{color:@a-hover; fill:@a-hover;}
-            &:active .icon use{color:@a-active; fill:@a-active;} 
-        }
+    .icon{
+        .link(@a-link, @a-hover, @a-active, @a-link);
+        .svglink(@a-link, @a-hover, @a-active, @a-link);
     }
 }
 
@@ -76,14 +55,11 @@
         color:@font;
         .links(@a-link, @a-hover, @a-active, @a-visited);
         .icons(@icon-link, @icon-hover, @icon-active, @icon-link);
-        a.text{.link(@font, @font, @font, @font);}
+        & when not (@font = transparent){
+            a.text{.link(@font, @font, @font, @font);}
+        }
     }
     
-    //row arrow
-    & > .arrow-right:after{ border-left-color:@bg;}
-    & > .arrow-left:after{ border-right-color:@bg;}
-    .arrow-expand{border-color: transparent transparent transparent @font;}
-
     & when not (@hover = transparent){
         //row hover (optional)
         & when (@is-hover-alt = false){
@@ -92,9 +68,6 @@
                 color:@font-hover;
                 .links(@a-hover, @a-hover, @a-active, @a-hover);
                 .icons(@icon-hover, @icon-hover, @icon-active, @icon-hover);
-                & > .arrow-right:after{ border-left-color:@hover;}
-                & > .arrow-left:after{ border-right-color:@hover;}
-                .arrow-expand{border-color: transparent transparent transparent @font-hover;}
             }
         }
         & when (@is-hover-alt = true){
@@ -103,9 +76,6 @@
                 color:@font-hover;
                 .links(@a-hover, @a-hover, @a-active, @a-hover);
                 .icons(@icon-hover, @icon-hover, @icon-active, @icon-hover);
-                & > .arrow-right:after{ border-left-color:@hover;}
-                & > .arrow-left:after{ border-right-color:@hover;}
-                .arrow-expand{border-color: transparent transparent transparent @font-hover;}
             }
         }
     }
@@ -121,9 +91,6 @@
                 .link(@a-selected, @a-hover, @a-active, @a-selected);
                 .svglink(@icon-selected, @icon-hover, @icon-active, @icon-selected);
             }
-            & > .arrow-right:after{ border-left-color:@selected;}
-            & > .arrow-left:after{ border-right-color:@selected;}
-            .arrow-expand{border-color: transparent transparent transparent @font-selected;}
         }
 
         & when (@is-hover-alt = true){
@@ -136,18 +103,12 @@
                 .link(@a-selected, @a-hover, @a-active, @a-selected);
                 .svglink(@icon-selected, @icon-hover, @icon-active, @icon-selected);
             }
-            & > .arrow-right:after{ border-left-color:@selected;}
-            & > .arrow-left:after{ border-right-color:@selected;}
-            .arrow-expand{border-color: transparent transparent transparent @font-selected;}
         }
         }
     }
 }
 .row(@bg, @hover, @selected, @font, @font-hover, @font-selected, @a-link, @a-hover, @a-active, @a-visited, @a-selected, @icon-link, @icon-hover, @icon-active, @icon-selected){
     .row{.get-row(@bg, @hover, @selected, @font, @font-hover, @font-selected, @a-link, @a-hover, @a-active, @a-visited, @a-selected, @icon-link, @icon-hover, @icon-active, @icon-selected, false);}
-}
-.row-alt(@bg, @hover, @selected, @font, @font-hover, @font-selected, @a-link, @a-hover, @a-active, @a-visited, @a-selected, @icon-link, @icon-hover, @icon-active, @icon-selected){
-    .row.alt{.get-row(@bg, @hover, @selected, @font, @font-hover, @font-selected, @a-link, @a-hover, @a-active, @a-visited, @a-selected, @icon-link, @icon-hover, @icon-active, @icon-selected, true);}
 }
 
 .table(@header-bg, @header-font, @header-a-link, @header-a-hover, @header-a-active, @header-a-visited, @row-bg, @row-hover, @row-selected, @row-font, @row-font-hover, @row-font-selected, @row-a-link, @row-a-hover, @row-a-active, @row-a-visited, @row-icon-link, @row-icon-hover, @row-icon-active, @row-icon-selected, @row-alt-bg, @row-alt-hover, @row-alt-selected, @row-alt-font, @row-alt-font-hover, @row-alt-font-selected, @row-alt-a-link, @row-alt-a-hover, @row-alt-a-active, @row-alt-a-visited, @row-alt-icon-link, @row-alt-icon-hover, @row-alt-icon-active, @row-alt-icon-selected){
@@ -209,6 +170,7 @@
 // input : styling for form inputs
 .input(@input-bg, @input-color, @input-border, @input-placeholder, @input-bg-hover, @input-color-hover, @input-border-hover, @input-bg-focus, @input-color-focus, @input-border-focus, @input-label, @input-label-hover){
     input[type]:not([type=button]):not([type=submit]):not([type=radio]), textarea, select{background:@input-bg; color:@input-color; border-color:@input-border;}
+    
     .input-placeholder() when not (@input-placeholder = transparent){
         input[type]:not([type=button]):not([type=submit]):not([type=radio])::-webkit-input-placeholder { /* Chrome/Opera/Safari */
           color: @input-placeholder;
@@ -225,10 +187,6 @@
         }
         textarea::-moz-placeholder {  /* Firefox 19+ */
             color: @input-placeholder;
-        }
- 
-        textarea:-ms-input-placeholder {  
-        color: green !important;  
         }
     }
     .input-hover() when not (@input-bg-hover = transparent){
@@ -270,50 +228,45 @@
 
     .get-button(){
         background:@bg;
-        border-color:@border;
-        outline-color:@outline;
-        color:@font !important;;
+        & when not (@border = transparent){
+            border-color:@border;
+        }
+        & when not (@outline = transparent){
+            outline-color:@outline;
+        }
+        color:@font !important;
         &:hover, &:focus{
             background:@bg-hover;
-            border-color:@border-hover;
-            outline-color:@outline-hover;
             color:@font-hover !important;
+            & when not (@border-hover = transparent){
+                border-color:@border-hover;
+            }
+            & when not (@outline-hover = transparent){
+                outline-color:@outline-hover;
+            }
         }
         &:active{
             background:@bg-active;
-            border-color:@border-active;
-            outline-color:@outline-active;
             color:@font-active;
+            & when not (@border-active = transparent){
+                border-color:@border-active;
+            }
+            & when not (@outline-active = transparent){
+                outline-color:@outline-active;
+            }
         }
         &.selected{
             background:@bg-selected;
-            border-color:@border-selected;
-            outline-color:@outline-selected;
             color:@font-selected;
+            & when not (@border-selected = transparent){
+                border-color:@border-selected;
+            }
+            & when not (@outline-selected = transparent){
+                outline-color:@outline-selected;
+            }
         }
-        &{.link(@font, @font-hover, @font-active, @font);}
-        &{.svglink(@font, @font-hover, @font-active, @font);}
-    }
-}
-
-// button-icon : a clickable icon
-.button-icon(@name, @default, @hover, @active, @important:false){
-    .check-button-name() when (@name = ''){
-        .button{
-            .get-button();
-        }
-    }
-
-    .check-button-name() when not (@name = ''){
-        .button.@{name}{
-            .get-button();
-        }
-    }
-
-    .check-button-name();
-
-    .get-button(){
-        .svglink(@default, @hover, @active, @default, @important);
+        .link(@font, @font-hover, @font-active, @font);
+        .svglink(@font, @font-hover, @font-active, @font);
     }
 }
 

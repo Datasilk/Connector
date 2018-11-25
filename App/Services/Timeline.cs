@@ -26,7 +26,7 @@ namespace Connector.Services
             });
 
             //render partial view
-            return RenderContent("Timeline", scaffold.Render());
+            return RenderContent("Timeline", "icon-timeline", scaffold.Render());
         }
     }
 }

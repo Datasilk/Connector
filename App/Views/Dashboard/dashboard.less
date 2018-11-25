@@ -1,18 +1,32 @@
 ﻿header{width:100%; padding:10px 20px; line-height:0; height:55px;
-    > .site{ display:inline-block; padding:3px 50px 0 0;
-        img{height:24px; vertical-align:bottom;}
+    > .site{ float:left; padding:5px 50px 0 0;
+        img{height:24px;}
     }
-    > ul{ display:inline-block; position:relative; top:11px;
-        li{float:left; list-style:none; padding:7px 15px; margin:0 2px; border-top-left-radius:8px; border-top-right-radius:8px; line-height:1.25;
+    > ul{ display:inline-block; position:relative; top:8px;
+        li{float:left; position:relative; z-index:5; list-style:none; padding:7px 15px 0 15px; border-top-left-radius:8px; border-top-right-radius:8px; line-height:1.25;
            a{text-decoration:none;}
+           span{vertical-align:top; display:inline-block; padding-top:2px;}
+        }
+
+        li .spoon-l{ overflow: hidden; position: absolute; width:11px; height:10px; left:-10px; bottom:0;
+            &:before { position:absolute; margin:-30px; padding:20px; border-radius:7px; box-shadow:0 0 0 20px #eee; content: "";}
+        }
+        li .spoon-r{ overflow: hidden; position: absolute; width:11px; height:10px; right:-10px; bottom:0;
+                     transform-style:preserve-3d; transform:rotateY(180deg);
+            &:before { position:absolute; margin:-30px; padding:20px; border-radius:7px; box-shadow:0 0 0 20px #eee; content: "";}
         }
         &:after{content:'';display:block;height:0;font-size:0;clear:both;}
+        li.selected{z-index:6;}
     }
-    > .profile{ float:right; line-height:0; padding:10px 10px 13px 15px; margin:-10px -20px -12px 0; background:#375d50; cursor:pointer;
-        span{font-size:18px; vertical-align:top; display:inline-block; padding:15px 5px 0 0;}
-        img{overflow:hidden; border-radius:64px; height:32px;}
+    > .profile{float:right; line-height:0; margin:-10px -20px -12px 0;
+        .user{float:left;padding:10px 10px 13px 15px; cursor:pointer;
+            span{font-size:18px; vertical-align:top; display:inline-block; padding:15px 5px 0 0;}
+            img{overflow:hidden; border-radius:64px; height:32px;}
+        }
+        .options{float:left; line-height:0; padding:10px 10px 13px 15px; cursor:pointer;
+            svg{padding:0 7px;}
+        }
+        &:after{content:'';display:block;height:0;font-size:0;clear:both;} 
     }
-    > .profile:hover{background:#2c6c56;}
-    > .profile:active{background:#24887f;}
     &:after{content:'';display:block;height:0;font-size:0;clear:both;} 
 }

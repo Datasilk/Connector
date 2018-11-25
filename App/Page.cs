@@ -12,7 +12,6 @@ namespace Connector
 
         public override string Render(string[] path, string body = "", object metadata = null)
         {
-            scripts.Append("<script language=\"javascript\">S.svg.load('/images/icons.svg');</script>");
             return base.Render(path, body, metadata);
         }
 
