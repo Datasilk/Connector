@@ -1,7 +1,20 @@
 ﻿S.dashboard = {
     init: function () {
         //load button events
-        $('header .profile').on('click', () => S.dashboard.tab.open('Profile'));
+        $('header .user').on('click', () => S.dashboard.tab.open('Profile'));
+        $('header .options').on('click', S.dashboard.options.show);
+
+        //load options menu button events
+        $('.options-menu a').each((ev) => {
+            let a = $(ev);
+            const apath = a.get().getAttribute('href'); 
+            a.on('click', (e) => {
+                S.dashboard.tab.open(apath);
+                e.cancleBubble = true;
+                e.preventDefault();
+                return false;
+            });
+        });
 
         //load timeline
         S.dashboard.tab.open('Timeline');
@@ -45,7 +58,6 @@
                         .replace('#href#', compiledpath)
                         .replace('#label#', d.title)
                         .replace('#icon#', d.icon);
-                    console.log(li);
                     $('header ul.tabs').append(li);
                     $('.tab-' + id + ' a').on('click', (e) => {
                         S.dashboard.tab.open(path, data);
@@ -78,6 +90,16 @@
                 error: function (d) {
 
                 }
+            });
+        }
+    },
+
+    options: {
+        show: function () {
+            $('.options-menu').addClass('show');
+            $(document.body).on('click', (e) => {
+                $('.options-menu').removeClass('show');
+                $(document.body).off('click');
             });
         }
     }
